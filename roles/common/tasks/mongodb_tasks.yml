@@ -8,7 +8,7 @@
     name: mongodb-org-shell 
     state: present
 
-- name: Get the entries count #if the count is 0 i.e, no data in catalogue server
+- name: Get the catalogue entries count #if the count is 0 i.e, no data in catalogue server
   ansible.builtin.command: mongo --host mongodb.haripalepu.cloud --quiet --eval 'db = db.getSiblingDB("catalogue"); db.products.count()'
   register: entries_count
   when: host_name == "catalogue" #while running the catalogue server this task will execute
