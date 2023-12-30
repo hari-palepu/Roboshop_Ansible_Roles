@@ -1,0 +1,5 @@
+- name: "Install {{name}}"
+  hosts: "{{name}}"
+  become: yes
+  roles:
+  - "{{name}}"
