@@ -13,10 +13,10 @@
   register: entries_count
   when: host_name == "catalogue" #while running the catalogue server this task will execute
 
-# - name: Get the entries count #if the count is 0 i.e, no data in catalogue server
-#   ansible.builtin.command: mongo --host mongodb.haripalepu.cloud --quiet --eval 'db = db.getSiblingDB("users"); db.users.count()''
-#   register: entries_count
-#   when: host_name == "user" #while running the user server this task will execute
+- name: "get the user entries count"
+  ansible.builtin.shell:  mongo --host mongodb.haripalepu.cloud --quiet --eval 'db = db.getSiblingDB("users"); db.users.count()'
+  register: users_count
+  when: host_name == "user" #while running the user server this task will execute
 
 - name: "Load {{host_name}} data"
   ansible.builtin.command: "mongo --host mongodb.haripalepu.cloud < /app/schema/{{host_name}}.js"
