@@ -10,10 +10,10 @@
 
   - name: MongoDb task 
     ansible.builtin.import_role:
-      name: common #To call common role. The common has tasks inside that we have nodejs
+      name: common #To call common role. The common has tasks inside that we have mongodb tasks
       tasks_from: mongodb_tasks #Name of a file in common role
 
   - name: Start and enable the services 
     ansible.builtin.import_role:
-      name: common #To call common role. The common has tasks inside that we have nodejs
+      name: common #To call common role. The common has tasks inside that we have systemd file
       tasks_from: systemd #Name of a file in common role
