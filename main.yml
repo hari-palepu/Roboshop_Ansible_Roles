@@ -2,4 +2,4 @@
   hosts: "{{name}}"
   become: yes
   roles:
-  - {{name}}
+    - "{{name}}"
