@@ -15,7 +15,7 @@
 
 - name: "get the user entries count"
   ansible.builtin.shell:  mongo --host mongodb.haripalepu.cloud --quiet --eval 'db = db.getSiblingDB("users"); db.users.count()'
-  register: users_count
+  register: entries_count
   when: host_name == "user" #while running the user server this task will execute
 
 - name: "Load {{host_name}} data"
