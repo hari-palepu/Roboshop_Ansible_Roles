@@ -1,9 +1,6 @@
 #Common taks are kept in common role to call when erver required.
 
-- name: Install NodeJS
-  ansible.builtin.dnf: 
-    name: nodejs
-    state: present
+
 
 - name: Creat roboshop user
   ansible.builtin.user: #Ansible user module

@@ -2,3 +2,8 @@
     ansible.builtin.import_role:
       name: common #To call common role. The common has tasks inside that we have repeadted tasks
       tasks_from: repeated_tasks #Name of a file in common role
+
+  - name: 
+    ansible.builtin.import_role:
+      name: common #To call common role. The common has tasks inside that we have nodejs
+      tasks_from: nodejs
