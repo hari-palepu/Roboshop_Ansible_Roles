@@ -28,6 +28,6 @@
   ansible.builtin.template:  
     src: roboshop.conf.j2
     dest: /etc/nginx/default.d/roboshop.conf
-    notify:
+  notify:
     - Restart nginx
 
