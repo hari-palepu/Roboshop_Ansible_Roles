@@ -19,12 +19,12 @@
   when: host_name == "user" #while running the user server this task will execute
 
 - name: load catalogue data
-  ansible.builtin.shell: "mongo --host mongodb.haripalepu.cloud < /app/schema/{{component}}.js"
+  ansible.builtin.shell: "mongo --host mongodb.haripalepu.cloud < /app/schema/{{host_name}}.js"
   when: host_name == "catalogue" and products_count.stdout == "0"  # keep double quotes
   #ignore_errors: true
 
 - name: load user data
-  ansible.builtin.shell: "mongo --host mongodb.haripalepu.cloud < /app/schema/{{component}}.js"
+  ansible.builtin.shell: "mongo --host mongodb.haripalepu.cloud < /app/schema/{{host_name}}.js"
   when: host_name == "user" and users_count.stdout == "0"  # keep double quotes
   #ignore_errors: true
 
