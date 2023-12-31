@@ -18,3 +18,5 @@ PAYMENT_HOST: payment.haripalepu.cloud
 
 SHIPPING_HOST: shipping.haripalepu.cloud
 
+DISPATCH: dispatch.haripalepu.cloud
+
