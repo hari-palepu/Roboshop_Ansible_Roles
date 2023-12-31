@@ -13,17 +13,17 @@
   register: products_count
   when: host_name == "catalogue" #while running the catalogue server this task will execute
 
-- name: "get the user entries count"
+- name: get the user entries count
   ansible.builtin.shell:  mongo --host mongodb.haripalepu.cloud --quiet --eval 'db = db.getSiblingDB("users"); db.users.count()'
   register: entries_count
   when: host_name == "user" #while running the user server this task will execute
 
-- name: "load catalogue data"
+- name: load catalogue data
   ansible.builtin.shell: "mongo --host mongodb.haripalepu.cloud < /app/schema/{{component}}.js"
   when: host_name == "catalogue" and products_count.stdout == "0"  # keep double quotes
   #ignore_errors: true
 
-- name: "load user data"
+- name: load user data
   ansible.builtin.shell: "mongo --host mongodb.haripalepu.cloud < /app/schema/{{component}}.js"
   when: host_name == "user" and users_count.stdout == "0"  # keep double quotes
   #ignore_errors: true
