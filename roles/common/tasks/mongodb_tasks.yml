@@ -18,8 +18,12 @@
   register: entries_count
   when: host_name == "user" #while running the user server this task will execute
 
+# - name: "Load {{host_name}} data"
+#   ansible.builtin.command: "mongo --host mongodb.haripalepu.cloud < /app/schema/{{host_name}}.js"
+#   when: entries_count.stdout == "0" #When is a condition in ansible like if & else in linux
+
 - name: "Load {{host_name}} data"
-  ansible.builtin.shell: "mongo --host mongodb.haripalepu.cloud < /app/schema/{{host_name}}.js"
+  ansible.builtin.command: "mongo --host mongodb.haripalepu.cloud < /app/schema/{{host_name}}.js"
   when: entries_count.stdout == "0" #When is a condition in ansible like if & else in linux
 
 
