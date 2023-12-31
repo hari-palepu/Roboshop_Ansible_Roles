@@ -8,9 +8,9 @@
     name: mongodb-org-shell 
     state: present
 
-- name: Get the catalogue entries count #if the count is 0 i.e, no data in catalogue server
+- name: Get the catalogue products count #if the count is 0 i.e, no data in catalogue server
   ansible.builtin.command: mongo --host mongodb.haripalepu.cloud --quiet --eval 'db = db.getSiblingDB("catalogue"); db.products.count()'
-  register: entries_count
+  register: products_count
   when: host_name == "catalogue" #while running the catalogue server this task will execute
 
 - name: "get the user entries count"
@@ -18,12 +18,14 @@
   register: entries_count
   when: host_name == "user" #while running the user server this task will execute
 
-# - name: "Load {{host_name}} data"
-#   ansible.builtin.command: "mongo --host mongodb.haripalepu.cloud < /app/schema/{{host_name}}.js"
-#   when: entries_count.stdout == "0" #When is a condition in ansible like if & else in linux
+- name: "load catalogue data"
+  ansible.builtin.shell: "mongo --host {{MONGODB_HOST}} < /app/schema/{{component}}.js"
+  when: host_name == "catalogue" and products_count.stdout == "0"  # keep double quotes
+  #ignore_errors: true
 
-- name: "Load {{host_name}} data"
-  ansible.builtin.command: "mongo --host mongodb.haripalepu.cloud < /app/schema/{{host_name}}.js"
-  when: entries_count.stdout == "0" #When is a condition in ansible like if & else in linux
+- name: "load user data"
+  ansible.builtin.shell: "mongo --host {{MONGODB_HOST}} < /app/schema/{{component}}.js"
+  when: host_name == "user" and users_count.stdout == "0"  # keep double quotes
+  #ignore_errors: true
 
 #cntl+A then Shift+tab to fix the format
