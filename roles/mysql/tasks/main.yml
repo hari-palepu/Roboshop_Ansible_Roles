@@ -1,5 +1,5 @@
 - name: Disable current versio of mysql
-    ansible.builtin.command: dnf module disable mysql -y
+  ansible.builtin.command: dnf module disable mysql -y
 
 - name: Copy file with owner and permissions
   ansible.builtin.copy:
